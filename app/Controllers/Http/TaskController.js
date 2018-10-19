@@ -29,7 +29,7 @@ class TaskController {
     await task.save()
 
     // Fash success message to session
-    session.flash({ notification: 'Task added!' })
+    session.flash({type: 'success', notification: 'Tarea añadida!' })
 
     return response.redirect('back')
   }
@@ -40,7 +40,7 @@ class TaskController {
     await task.delete()
 
     //Fash success message to session
-    session.flash({ notification: 'Task deleted' })
+    session.flash({type: 'warning', notification: 'Tarea borrada' })
 
     return response.redirect('back')
   }

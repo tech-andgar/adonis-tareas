@@ -1,82 +1,84 @@
 @layout('master')
 
 @section('content')
-<div class="box">
-  <h2 class="title">New Task</h2>
+            {{--  ROW FORM NEW TASK  --}}
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Nueva Tarea</h4>
+                  {{--  <h6 class="card-subtitle text-muted">Subtitle</h6>  --}}
+                </div>
+                {{-- <img src="https://picsum.photos/800/200/" alt=""> --}}
+                <div class="card-body">
+                  <form action="/task" method="POST">
+                    {{ csrfField() }}
+                    <div class="form-group">
+                      <label for="title">Titulo de tarea</label>
+                      <div class="input-group">
+                        <input type="text" name="title" id="title" class="form-control" placeholder="" aria-describedby="helpTituloTarea">
+                        <div class="input-group-append">
+                          <button class="btn btn-success" type="submit">Crear tarea</button>
+                        </div>
+                      </div>
+                      {{ elIf('<small id="helpTituloTarea" class="text-danger">$self</small>',getErrorFor('title'),hasErrorFor('title'))}}
+                    </div>
+                  </form>
+                </div>
+              </div>
+            {{--  END ROW FORM NEW TASK  --}}
 
-  <form action="/tasks" method="POST">
-    {{ csrfField() }}
+            {{--  NOTIFICATION  --}}
+            @if(flashMessage('notification'))
+            <div class="alert alert-{{ flashMessage('type') }} alert-dismissible fade show mt-4">
+              {{ flashMessage('notification') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            @endif
+            {{--  END NOTIFICATION  --}}
+            
+{{--  <button type="button" onclick="toastr.info('Are you the 6 fingered man?')">test</button>  --}}
 
-    <div class="field has-addons">
-      <div class="control is-expanded">
-        <input class="input" type="text" name="title" value="{{ old('title', '') }}" placeholder="Task title">
-      </div>
-      <div class="control">
-        <button type="submit" class="button is-primary">
-          Add Task
-        </button>
-      </div>
-    </div>
-
-    {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
-  </form>
-</div>
-
-@if(old('notification'))
-  
-  @if(flashMessage('notification') == 'Task deleted')
-    <div class="notification is-warning">
-        {{ old('notification') }}
-    </div>  
-  @endif
-
-  @if(old('notification') == 'Task added!')
-    <div class="notification is-success">
-        {{ old('notification') }}
-    </div>
-  @endif
-
-@endif
-
-<div class="box">
-  <h1 class="title">Task List</h1>
-
-  <table class="table is-bordered is-striped is-narrow is-fullwidth">
-    <thead>
-      <tr>
-        <th>SN</th>
-        <th>Title</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      @each(task in tasks)
-      <tr>
-        <td>
-          {{ ($loop.index + 1) }}
-        </td>
-        <td>
-          {{ task.title }}
-        </td>
-        <td>
-          <form action="{{ 'tasks/' + task.id + '?_method=DELETE' }}" method="POST">
-            {{ csrfField() }}
-          
-            <button type="submit" class="button is-danger is-outlined">
-              <span>DELETE</span>
-              <span class="icon is-small">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </span>
-            </button>
-          </form>
-        </td>
-      </tr>
-      @else
-      <tr>
-        <td colspan="3" class="has-text-centered">No task created yet!</td>
-      </tr>
-      @endeach
-    </tbody>
-  </table>
-</div>
-@endsection
+            {{--  ROW TABLE TASK  --}}
+              <div class="card mt-4">
+                <div class="card-body">
+                  <h4 class="card-title">Lista de Tareas</h4>
+                  {{--  <h6 class="card-subtitle text-muted">Subtitle</h6>  --}}
+                </div>
+                {{-- <img src="https://picsum.photos/800/200/" alt=""> --}}
+                <div class="card-body table-responsive">
+                  <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>ID</th>
+                        <th>TAREA</th>
+                        <th>ACCIONES</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @each(task in tasks)
+                      <tr>
+                        <td scope="row">
+                          {{ ($loop.index + 1) }}
+                        </td>
+                        <td>
+                          {{ task.title }}
+                        </td>
+                        <td>
+                          <form action="{{ 'task/' + task.id + '?_method=DELETE' }}" method="POST">
+                            {{ csrfField() }}
+                            <button type="submit" class="btn btn-outline-danger"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Eliminar</button>
+                          </form>
+                        </td>
+                      </tr>
+                      @else
+                      <tr>
+                        <td colspan="3" class="has-text-centered">No se ha creado ninguna tarea todavía!</td>
+                      </tr>
+                      @endeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {{--  END ROW TABLE TASK  --}}
+            @endsection

@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Task List</title>
   {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
-  {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css') }}
+  {{ style('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css') }}
+  {{--  {{ style('node_module/sweetalert2/dist/sweetalert2.min.css') }}  --}}
+  {{--  {{ style('node_module/toastr/bulid/toastr.min.css') }}  --}}
+  {{-- SCRIPT --}}
+  {{ script('https://code.jquery.com/jquery-3.3.1.slim.min.js') }}
+  {{ script('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js') }}
+  {{ script('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js') }}
+  {{-- {{ script('../node_module/sweetalert2/dist/sweetalert2.min.js') }} --}}
+  {{-- {{ script('../node_module/toastr/bulid/toastr.min.js') }} --}}
 </head>
 
 <body>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-8 is-offset-2">
-          @!section('content')
-        </div>
-      </div>
-    </div>
-  </section>
+  <main class="container mt-4">
+    <article class="row">
+      <section class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+        @!section('content')
+      </section>
+    </article>
+  </main>
+  {{-- {{ script('app.js')}} --}}
+  <script src="app.js" type="module"></script>
 </body>
 
 </html>
