@@ -1,31 +1,66 @@
-# Adonis fullstack application
+# Una simple lista de tareas construida con AdonisJS
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+## Cómo empezar
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+Clone el repositorio del proyecto ejecutando el siguiente comando si utiliza SSH
 
-## Setup
-
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick
+```
+git clone git@github.com:andgar2010/adonis-tareas.git
 ```
 
-or manually clone the repo and then run `npm install`.
+Si usa https, use esto en su lugar
+
+```
+git clone https://github.com/andgar2010/adonis-tareas.git
+```
+
+## Configuración
+
+Ejecute el siguiente comando para instalar dependencias
+
+```
+npm install
+# or "yarn install"
+```
+
+### Descarga del navegador
+
+Dado que este repositorio depende de[puppeteer] (https://github.com/GoogleChrome/puppeteer) para realizar las pruebas, se requiere una versión de `Chromium` incluida.
+
+La instalación de **Chromium** puede tardar un poco y opcionalmente puede omitirla ejecutando el siguiente comando.
+
+```
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install
+```
 
 
-### Migrations
+### Variables de entorno
 
-Run the following command to run startup migrations.
+Duplicar `.env.example` y renombrarlo `.env`.
 
-```js
+
+### Migraciones
+
+Configure su base de datos e introduzca lo siguiente en `.env
+
+```
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_DATABASE=adonis-tasks
+DB_USER=root
+DB_PASSWORD=
+```
+
+Ejecute el siguiente comando para ejecutar la migración.
+
+```
 adonis migration:run
 ```
+
+Por último, inicie la aplicación:
+
+```
+adonis serve --dev
+```
+
+y visite http://127.0.0.1:3333/ para ver la aplicación en acción.
