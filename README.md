@@ -46,7 +46,7 @@ Configure su base de datos e introduzca lo siguiente en `.env
 ```
 DB_CONNECTION=mysql
 DB_HOST=localhost
-DB_DATABASE=adonis-tasks
+DB_DATABASE=adonis-tareas
 DB_USER=root
 DB_PASSWORD=
 ```
