@@ -1,5 +1,9 @@
 @layout('master')
 
+@section('title')
+<title>Lista de tareas</title>
+@endsection
+
 @section('content')
             {{--  ROW FORM NEW TASK  --}}
               <div class="card">
@@ -9,7 +13,7 @@
                 </div>
                 {{-- <img src="https://picsum.photos/800/200/" alt=""> --}}
                 <div class="card-body">
-                  <form action="/task" method="POST">
+                  <form action="/tasks" method="POST">
                     {{ csrfField() }}
                     <div class="form-group">
                       <label for="title">Titulo de tarea</label>
@@ -65,7 +69,7 @@
                           {{ task.title }}
                         </td>
                         <td>
-                          <form action="{{ 'task/' + task.id + '?_method=DELETE' }}" method="POST">
+                          <form action="{{ 'tasks/' + task.id + '?_method=DELETE' }}" method="POST">
                             {{ csrfField() }}
                             <button type="submit" class="btn btn-outline-danger"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Eliminar</button>
                           </form>
